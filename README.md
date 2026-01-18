@@ -230,4 +230,4 @@ The dashboard follows strict KPI design rules:
 ---
 
 ## 📸 Dashboard Preview
-![Dashboard Screenshot](./screenshots/bank_loan_dashboard.png)
+![Dashboard Screenshot]([./screenshots/bank_loan_dashboard.png](https://github.com/Sandeep-crtl/Bank_loan_analysis/blob/main/Screenshot%202026-01-19%20003911.png))
