@@ -1,32 +1,77 @@
-# 📊 Bank Loan Analysis Dashboard (Power BI)
+# 🚀 Bank Loan Analysis — Power BI Analytics Project
 
-## 📌 Project Overview
-This project is an end-to-end **Bank Loan Analysis Dashboard** built using **Power BI**.  
-The objective is to analyze loan performance from multiple perspectives — **business growth, operational details, credit risk, and profitability** — using well-defined KPIs, time intelligence (MTD, PMTD, MoM), and structured visual storytelling.
+[![Power BI](https://img.shields.io/badge/Tool-Power%20BI-orange)]()
+[![DAX](https://img.shields.io/badge/Language-DAX-blue)]()
+[![PowerQuery](https://img.shields.io/badge/ETL-Power%20Query-yellowgreen)]()
 
-The dashboard is designed to answer four critical questions:
-1. How is the loan business performing overall?
-2. What drives loan applications and funding?
-3. Where is the credit risk concentrated?
-4. Is the bank being adequately compensated for the risk taken?
+A professional, end-to-end **Bank Loan Analytics** solution built using Power BI.  
+This project consolidates loan application, funding, risk, and profitability data into a single, interactive dashboard suite that enables **data-driven credit, risk, and business decisions**.
 
 ---
 
-## 🎯 Business Objectives
-- Track **loan demand and funding trends**
-- Monitor **approval efficiency**
-- Identify **high-risk segments**
-- Measure **profitability and unit economics**
-- Support **data-driven credit and pricing decisions**
+## Table of Contents
+- About
+- Business Context
+- Problem Statement
+- Project Objective
+- Data Sources
+- Data Cleaning & Modeling
+- Dashboard Scope
+- KPI Framework
+- Tools & Technologies
+- Key Insights (Summary)
+- Strategic Recommendations
+- Skills & Learnings
+- How to Review / Run
+- Limitations & Data Privacy
+- Contact
 
 ---
 
-## 🧩 Dataset Description
-The dataset contains historical loan-level data with the following key attributes:
+## About
+This repository documents the design, data model, DAX logic, and insights developed for a **Bank Loan Analysis Power BI Dashboard**.  
+The project focuses on **loan performance, borrower behavior, credit risk, and profitability**, using structured KPIs and time intelligence (MTD, PMTD, MoM).
+
+---
+
+## 🏦 Business Context
+The bank provides loans across multiple purposes, borrower profiles, and credit grades.  
+As loan volume grows, decision-makers need:
+- Clear visibility into loan demand and funding
+- Early identification of credit risk
+- Understanding of profitability versus risk
+- Consistent reporting across time
+
+This dashboard addresses these needs through a unified analytics layer.
+
+---
+
+## 🚩 Problem Statement
+Loan reporting was fragmented and metric-heavy without clear narratives, resulting in:
+- Difficulty tracking month-to-date performance
+- Poor visibility into default and risk concentration
+- Limited understanding of profitability drivers
+- Manual effort to compare trends across months
+
+A centralized Power BI solution was required to **standardize KPIs**, **enable trend analysis**, and **support faster decisions**.
+
+---
+
+## 🎯 Project Objective
+Design and deliver a Power BI dashboard that:
+- Tracks loan demand, funding, and repayments
+- Monitors credit risk using defensible metrics
+- Measures profitability and unit economics
+- Supports MTD, PMTD, and MoM analysis
+- Separates business, risk, and profit narratives clearly
+
+---
+
+## 🗄️ Data Sources
+The dataset contains historical loan-level records including:
 - Loan ID
 - Application Date
-- Loan Amount
-- Funded Amount
+- Loan Amount & Funded Amount
 - Total Payment Received
 - Loan Purpose
 - Loan Grade
@@ -35,22 +80,31 @@ The dataset contains historical loan-level data with the following key attribute
 - Interest Rate
 - Loan Status (Good / Bad)
 
-A **Date Table** is used to enable time intelligence calculations.
+A dedicated **Date Table** is used to enable time intelligence.
 
 ---
 
-## 🏗️ Dashboard Structure
+## 🧹 Data Cleaning & Modeling
+Key steps performed:
+- Standardized column names and data types
+- Removed duplicates and invalid records
+- Created a Date dimension for time-based analysis
+- Defined relationships between fact and dimension tables
+- Built reusable base measures for consistency
+- Optimized model by avoiding redundant calculations
+
+---
+
+## 📊 Dashboard Scope
 
 ### 1️⃣ Summary Page
-**Purpose:** High-level snapshot for executives.
+**Purpose:** Executive snapshot.
 
 **KPIs:**
 - Total Loan Applications
 - Total Funded Amount
 - Total Amount Received
 - Average Interest Rate
-
-This page answers: *“What is the overall size and pricing of the loan portfolio?”*
 
 ---
 
@@ -61,40 +115,34 @@ This page answers: *“What is the overall size and pricing of the loan portfoli
 - Total Loan Applications
 - Total Funded Amount
 - Approval Rate (%)
-- Month-over-Month Loan Application Growth (%)
-
-This page answers: *“Is demand growing, and how efficiently are applications converted into funded loans?”*
+- MoM Loan Application Growth (%)
 
 ---
 
 ### 3️⃣ Details Page
-**Purpose:** Understand volume drivers and borrower composition.
+**Purpose:** Loan composition and borrower behavior.
 
 **KPIs:**
-- Average Loan Amount  
-- Applications per Borrower  
-- Top Loan Purpose Share (%)  
-- Stable Employment Share (%)  
-
-This page answers: *“Who is borrowing, for what purpose, and how concentrated is the portfolio?”*
+- Average Loan Amount
+- Applications per Borrower
+- Top Loan Purpose Share (%)
+- Stable Employment Share (%)
 
 ---
 
 ### 4️⃣ Risk Page
-**Purpose:** Credit quality and exposure analysis.
+**Purpose:** Credit quality and exposure.
 
 **KPIs:**
-- Bad Loan % (based on loan applications)
+- Bad Loan % (Application-based)
 - Bad Loan Exposure (Funded Amount)
 - Average DTI
 - High-Risk Grade Exposure (%)
 
-This page answers: *“How risky is the portfolio, and where is the risk concentrated?”*
-
 ---
 
 ### 5️⃣ Profit Page
-**Purpose:** Measure financial return versus risk.
+**Purpose:** Financial return vs risk.
 
 **KPIs:**
 - Net Profit
@@ -102,113 +150,84 @@ This page answers: *“How risky is the portfolio, and where is the risk concent
 - Average Interest Rate
 - Profit per Loan
 
-This page answers: *“Is the bank earning enough to justify the risk taken?”*
+---
+
+## 📐 KPI Framework
+The dashboard follows strict KPI design rules:
+- Ratios are calculated from aggregated values (not averaged ratios)
+- MTD and PMTD are calculated at numerator and denominator levels
+- MoM % is used only for absolute metrics
+- Percentage-point change is used for ratio KPIs
+- Risk and profit metrics are never mixed without context
 
 ---
 
-## 📐 Key Measures & Logic
-
-### Core Measures
-- **Total Loan Applications** = Count of Loan IDs  
-- **Total Funded Amount** = Sum of Loan Amount  
-- **Total Amount Received** = Sum of Total Payments  
-- **Average Interest Rate** = Average of Interest Rate  
-- **Average DTI** = Average of DTI  
-
----
-
-### Risk Measures
-- **Bad Loan %** = Bad Loan Applications ÷ Total Loan Applications  
-- **Bad Loan Exposure** = Funded Amount of Bad Loans  
-- **High-Risk Exposure %** = Funded Amount (Grades D–G) ÷ Total Funded Amount  
-
----
-
-### Profit Measures
-- **Net Profit** = Total Amount Received − Total Funded Amount  
-- **Profit Margin %** = Net Profit ÷ Total Funded Amount  
-- **Profit per Loan** = Net Profit ÷ Total Loan Applications  
-
----
-
-## ⏱️ Time Intelligence (MTD, PMTD, MoM)
-
-### Month-to-Date (MTD)
-Used to analyze current month performance up to the selected date.
-
-**Example:**
-- MTD Loan Applications
-- MTD Bad Loan %
-- MTD Approval Rate
-- MTD Stable Employment %
-
-### Previous Month-to-Date (PMTD)
-Used for comparison against the previous month.
-
-### Month-over-Month (MoM)
-Calculated as:
-- **Absolute Change** for ratios (e.g., Bad Loan %, Avg DTI)
-- **Percentage Change** for amounts (e.g., Funded Amount, Exposure)
-
-This ensures mathematically correct and interpretable trends.
-
----
-
-## 📊 Visualization Techniques
-- KPI Cards with MTD values and MoM indicators
-- Horizontal and Vertical Bar Charts for ranking
-- Highlight-based interaction for cross-filtering
-- Scatter plots for Interest Rate vs Default Risk
-- Trend lines for monthly performance tracking
-
-All visuals follow consistent color coding:
-- Blue → Primary metrics
-- Red → Risk indicators
-- Green → Positive performance
-
----
-
-## 🧠 Key Insights Enabled
-- Identification of high-risk loan grades and purposes
-- Early warning signals using DTI and Bad Loan %
-- Understanding whether growth is volume-driven or quality-driven
-- Clear separation between **growth**, **risk**, and **profit** narratives
+## ⏱️ Time Intelligence
+- **MTD (Month-to-Date):** Current month performance up to selected date
+- **PMTD (Previous Month-to-Date):** Same period comparison
+- **MoM (Month-over-Month):** Trend analysis using correct mathematical logic
 
 ---
 
 ## 🛠️ Tools & Technologies
-- **Power BI**
-- **DAX (Data Analysis Expressions)**
-- **Date Table & Time Intelligence**
-- **GitHub for version control**
+- Power BI Desktop
+- Power Query (ETL)
+- DAX (Measures & Time Intelligence)
+- Excel / CSV (Data Source)
+- GitHub (Version Control)
 
 ---
 
-## ✅ Best Practices Followed
-- Ratios calculated using aggregated values (not averaged ratios)
-- Clear separation of KPIs by business objective
-- Consistent MTD / PMTD / MoM logic
-- Risk and profit metrics never mixed without context
-- Dashboard pages designed with a single, clear question in mind
+## 📈 Key Insights (Summary)
+- Loan demand shows clear monthly seasonality
+- Certain loan purposes dominate application volume
+- Higher loan grades contribute disproportionately to risk
+- Rising DTI often precedes increases in bad loans
+- Profitability varies significantly by grade and purpose
+- High volume does not always translate into high profit
 
 ---
 
-## 📌 Conclusion
-This Bank Loan Analysis Dashboard provides a **holistic, business-ready view** of loan performance.  
-It balances **growth, risk, and profitability** and is suitable for **executive reviews, credit committees, and operational teams**.
-
-The project demonstrates strong skills in:
-- Data modeling
-- DAX time intelligence
-- KPI design
-- Financial and risk analysis
-- Dashboard storytelling
+## 📌 Strategic Recommendations
+- Monitor approval rate trends to balance growth and risk
+- Limit exposure to high-risk grades during growth phases
+- Adjust pricing where interest does not compensate for default risk
+- Focus on stable employment segments for portfolio quality
+- Track profitability at a per-loan level, not just totals
 
 ---
 
-📁 **This repository contains:**
-- Power BI report file
-- Supporting documentation
-- DAX logic embedded in the model
+## 🧠 Skills & Learnings
+- Financial and credit risk analysis
+- KPI design aligned to business questions
+- Advanced DAX for time intelligence
+- Data modeling best practices
+- Dashboard storytelling for decision-makers
 
-Feel free to explore, fork, or adapt this project for learning and professional use.
+---
+
+## ▶️ How to Review / Run
+- Open the `.pbix` file using Power BI Desktop
+- Ensure Date Table is properly related
+- Refresh data after configuring sources
+- Use slicers to test MTD and MoM behavior
+- Validate KPI behavior across pages
+
+---
+
+## ⚠️ Limitations & Data Privacy
+- Dataset is for learning and demonstration purposes
+- Insights should be validated with real production data
+- No personally identifiable information (PII) is included
+
+---
+
+## Contact
+- Maintainer: **Sandeep-crtl**
+- Project: **Bank Loan Analysis Dashboard**
+- Platform: **Power BI**
+
+---
+
+## 📸 Dashboard Preview
+![Dashboard Screenshot](./screenshots/bank_loan_dashboard.png)
